@@ -1,21 +1,17 @@
 * {
   box-sizing: border-box;
 }
-
 body {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 span {
   width: 250px;
 }
-
 option {
   width: 50px;
 }
-
 select {
   width: 100%;
   min-width: 15ch;
@@ -29,7 +25,6 @@ select {
   background-color: #fff;
   background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
 }
-
 .App {
   width: 80vw;
   height: 80vh;
@@ -44,12 +39,10 @@ select {
   font-size: 30px;
   width: 100%;
   margin-bottom: 25px;
+  &__convert-currency {
+    color: blue;
+  }
 }
-
-.board__convert-currency {
-  color: blue;
-}
-
 .container {
   display: flex;
   flex-direction: column;
@@ -63,10 +56,9 @@ select {
   justify-content: space-around;
   border-radius: 5px;
   margin-right: 20px;
-}
-
-.currency__mount {
-  width: 45%;
-  border-radius: 5px;
-  border: solid 3px grey;
+  &__mount {
+    width: 45%;
+    border-radius: 5px;
+    border: solid 3px grey;
+  }
 }

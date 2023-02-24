@@ -1,58 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import { useEffect } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
-  );
-}
+import { useDispatch, useSelector } from 'react-redux';
+import { CurrencyState } from './entities/currency';
+import { fetchCurrencyData } from './state/action/actionCreators';
+import { TypedDispatch } from './entities/storeTypes';
+import MySelect from './MySelect';
+
+import MyInput from './MyInput';
+import './index.scss';
+
+const App = () => {
+  const dispatch = useDispatch<TypedDispatch>();
+  const { country, isLoading, error } = useSelector((state: CurrencyState) => state.currency);
+  console.log(country);
+
+  useEffect(() => {
+    dispatch(fetchCurrencyData());
+  }, [dispatch]);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  if (country) {
+    return (
+      <div className="App">
+        <header>
+          <div className="board">
+            <span>{` entspricht`}</span>
+            <span className="board__convert-currency">{``}</span>
+          </div>
+        </header>
+        <div className="container">
+          <div className=" currency">
+            <MyInput />
+            <MySelect country={country} />
+            <MyInput />
+            <MySelect country={country} />
+          </div>
+        </div>
+      </div>
+    );
+  }
+  return null;
+};
 
 export default App;
