@@ -3,6 +3,9 @@ export enum ActionTypes {
   FETCH_START = 'FETCH_START',
   FETCH_SUCCESS = 'FETCH_SUCCESS',
   FETCH_ERROR = 'FETCH_ERROR',
+  FETCH_CONVERT_CURRENCY = 'FETCH_CONVERT_CURRENCY',
+  FETCH_CONVERT_CURRENCY_SUCCESS = 'FETCH_CONVERT_CURRENCY_SUCCESS',
+  FETCH_CONVERT_CURRENCY_ERROR = 'FETCH_CONVERT_CURRENCY_ERROR',
 }
 
 export interface FetchStartAction {
@@ -18,5 +21,13 @@ export interface FetchErrorAction {
   type: ActionTypes.FETCH_ERROR;
   payload: string;
 }
+export interface FetchConvertCurrencyAction {
+  type: ActionTypes.FETCH_CONVERT_CURRENCY;
+  payload: any;
+}
 
-export type ActionTyp = FetchStartAction | FetchSuccessAction | FetchErrorAction;
+export type ActionTyp =
+  | FetchStartAction
+  | FetchSuccessAction
+  | FetchErrorAction
+  | FetchConvertCurrencyAction;

@@ -4,14 +4,14 @@ import type { CurrencyInitialState } from '../../entities/currency';
 import type { ActionTyp } from '../../entities/actionTypes';
 
 const initialState: CurrencyInitialState = {
-  currencyAbbrByCountry: null,
+  currencyNameArray: [],
   country: [],
   abbr: [],
   isLoading: false,
   error: null,
 };
 
-const reducer = (state = initialState, action: ActionTyp): CurrencyInitialState => {
+const currencyNameReducer = (state = initialState, action: ActionTyp): CurrencyInitialState => {
   console.log(action);
   switch (action.type) {
     case ActionTypes.FETCH_START:
@@ -24,7 +24,7 @@ const reducer = (state = initialState, action: ActionTyp): CurrencyInitialState 
       return {
         ...state,
         isLoading: false,
-        currencyAbbrByCountry: action.payload,
+        currencyNameArray: action.payload,
         country: Object.values(action.payload),
         abbr: Object.keys(action.payload),
       };
@@ -34,9 +34,9 @@ const reducer = (state = initialState, action: ActionTyp): CurrencyInitialState 
         isLoading: false,
         error: action.payload,
       };
+
     default:
       return state;
   }
 };
-
-export default reducer;
+export default currencyNameReducer;

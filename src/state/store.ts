@@ -1,10 +1,11 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { logger } from 'redux-logger';
-
-import reducer from './reducer';
+import convertCurrencyReducer from './reducers/convertCurrency';
+import currencyNameReducer from './reducers/currencyName';
 
 const rootReducer = combineReducers({
-  currency: reducer,
+  currencyName: currencyNameReducer,
+  convertCurrencyAmount: convertCurrencyReducer,
 });
 
 export const store = configureStore({

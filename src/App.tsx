@@ -1,45 +1,48 @@
-import { useEffect } from 'react';
-
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppSelector } from './app/hooks';
 import { CurrencyState } from './entities/currency';
-import { fetchCurrencyData } from './state/action/actionCreators';
-import { TypedDispatch } from './entities/storeTypes';
+import { useSelector } from 'react-redux';
+
 import MySelect from './MySelect';
 
 import MyInput from './MyInput';
 import './index.scss';
+import useCurrency from './app/useCurrency';
+import { currencyNameSelector, convertCurrencySelector } from './state/selectors';
 
 const App = () => {
-  const dispatch = useDispatch<TypedDispatch>();
-  const { country, isLoading, error } = useSelector((state: CurrencyState) => state.currency);
-  console.log(country);
+  const { country, currencyNameArray } = useAppSelector(currencyNameSelector);
 
-  useEffect(() => {
-    dispatch(fetchCurrencyData());
-  }, [dispatch]);
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  const { convertAmount } = useAppSelector(convertCurrencySelector);
+  const {
+    getAmount,
+    amount,
+    convertCurrencyCountry,
+    onChangeBase,
+    base,
+    onChangeConvertCur,
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+    convertCurrency,
+  } = useCurrency(currencyNameArray, country);
 
   if (country) {
     return (
       <div className="App">
         <header>
           <div className="board">
-            <span>{` entspricht`}</span>
-            <span className="board__convert-currency">{``}</span>
+            <span>{`${amount} ${base} entspricht`}</span>
+            <span className="board__convert-currency">{`${convertAmount} ${convertCurrency}`}</span>
           </div>
         </header>
         <div className="container">
           <div className=" currency">
-            <MyInput />
-            <MySelect country={country} />
-            <MyInput />
-            <MySelect country={country} />
+            <MyInput getAmount={getAmount} amount={amount} />
+            <MySelect country={country} onChangeFunction={onChangeBase} value={base} />
+            <MyInput getAmount={getAmount} amount={convertAmount} />
+            <MySelect
+              country={country}
+              onChangeFunction={onChangeConvertCur}
+              value={convertCurrencyCountry}
+            />
           </div>
         </div>
       </div>
