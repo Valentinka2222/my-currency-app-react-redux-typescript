@@ -5,14 +5,15 @@ import { ActionTypes, ActionTyp } from '../../entities/actionTypes';
 import { Dispatch } from 'react';
 
 import axios from 'axios';
+import { getCurrency } from '../../data/currency';
 
-export const fetchCurrencyName = (): TypedThunk => {
+export const getCurrencyName = (): TypedThunk => {
   return async (dispatch: Dispatch<ActionTyp>) => {
     dispatch({ type: ActionTypes.FETCH_START });
     try {
-      const response = await axios.get('https://openexchangerates.org/api/currencies.json');
-      const data = response.data;
-      dispatch({ type: ActionTypes.FETCH_SUCCESS, payload: data });
+      const response = await getCurrency();
+
+      dispatch({ type: ActionTypes.FETCH_SUCCESS, payload: response });
     } catch (error) {
       return ({ message }: { message: string }) => {
         dispatch({ type: ActionTypes.FETCH_ERROR, payload: message });
@@ -21,17 +22,15 @@ export const fetchCurrencyName = (): TypedThunk => {
   };
 };
 
-export const fetchConvertCurrency = (
-  options: Record<string, string | ParamsObj | number>,
+export const getConvertCurrency = (
+  options: Record<string, string | ParamsObj | number | undefined>,
 ): TypedThunk => {
-  console.log(options);
   return async (dispatch: Dispatch<ActionTyp>) => {
     try {
-      const response = await axios.get(
-        `https://api.apilayer.com/currency_data/convert?${params(options)}`,
-      );
-
+      const response = await axios.get(`${process.env.REACT_APP_URL}convert?${params(options)}`);
+      console.log(process.env.REACT_APP_URL);
       const convertAmount = response.data.result;
+
       dispatch({ type: ActionTypes.FETCH_CONVERT_CURRENCY, payload: convertAmount });
     } catch (error) {
       return ({ message }: { message: string }) => {
@@ -40,22 +39,3 @@ export const fetchConvertCurrency = (
     }
   };
 };
-
-// export const fetchConvertCurrency = (
-//   options: Record<string, string | ParamsObj | number>,
-// ): TypedThunk => {
-//   console.log(options);
-//   return async (dispatch: Dispatch<ActionTyp>) => {
-//     try {
-//       const response = await fetch(
-//         `https://api.apilayer.com/currency_data/convert?${params(options)}`,
-//       );
-//       const convertAmount = response.json();
-//       dispatch({ type: ActionTypes.FETCH_CONVERT_CURRENCY, payload: convertAmount });
-//     } catch (error) {
-//       return ({ message }: { message: string }) => {
-//         console.log(message);
-//       };
-//     }
-//   };
-// };

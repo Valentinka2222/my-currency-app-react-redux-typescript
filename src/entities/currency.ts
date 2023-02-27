@@ -11,7 +11,7 @@ export type Options = {
 
 export interface CurrencyInitialState {
   currencyNameArray: string[];
-  country: string[];
+  fullCurencyName: string[];
   abbr: string[];
   isLoading: boolean;
   error: string | null;
@@ -23,4 +23,10 @@ export type ConvertCurrency = {
 export type CurrencyState = {
   currencyName: CurrencyInitialState;
   convertCurrencyAmount: ConvertCurrency;
+};
+export type Convert = {
+  baseCurrency?: string;
+  convertCurrency?: string;
+  baseCurrencyFullName?: string;
+  convertFullCurrencyName?: string;
 };

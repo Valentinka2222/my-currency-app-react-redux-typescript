@@ -1,12 +1,11 @@
 import { ParamsObj } from '../entities/currency';
 
-export const params = (paramsObj: Record<string, string | number | ParamsObj | undefined>) => {
+export const params = (
+  paramsObj: Record<string, string | number | ParamsObj | string | undefined>,
+) => {
   return new URLSearchParams({
-    apikey: '0LsO0hGjDB91eWbioFpFK0cyQPnCmLVv',
+    apikey: `${process.env.REACT_APP_API_KEY}`,
     ...paramsObj,
   });
 };
-export const getLatest = (options: Record<string, string | ParamsObj | number>) =>
-  fetch(`${process.env.REACT_APP_URL_Currency}/latest?${params(options)}`).then(res => res.json());
-// export const getConvertCurrency = (options: Record<string, string | ParamsObj | number>) =>
-//   fetch(`${process.env.REACT_APP_URL_Currency}/convert?${params(options)}`).then(res => res.json());
+console.log(process.env);

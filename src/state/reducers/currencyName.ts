@@ -5,14 +5,13 @@ import type { ActionTyp } from '../../entities/actionTypes';
 
 const initialState: CurrencyInitialState = {
   currencyNameArray: [],
-  country: [],
+  fullCurencyName: [],
   abbr: [],
   isLoading: false,
   error: null,
 };
 
 const currencyNameReducer = (state = initialState, action: ActionTyp): CurrencyInitialState => {
-  console.log(action);
   switch (action.type) {
     case ActionTypes.FETCH_START:
       return {
@@ -25,7 +24,7 @@ const currencyNameReducer = (state = initialState, action: ActionTyp): CurrencyI
         ...state,
         isLoading: false,
         currencyNameArray: action.payload,
-        country: Object.values(action.payload),
+        fullCurencyName: Object.values(action.payload),
         abbr: Object.keys(action.payload),
       };
     case ActionTypes.FETCH_ERROR:

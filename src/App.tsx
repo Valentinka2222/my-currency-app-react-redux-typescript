@@ -1,6 +1,4 @@
 import { useAppSelector } from './app/hooks';
-import { CurrencyState } from './entities/currency';
-import { useSelector } from 'react-redux';
 
 import MySelect from './MySelect';
 
@@ -10,38 +8,37 @@ import useCurrency from './app/useCurrency';
 import { currencyNameSelector, convertCurrencySelector } from './state/selectors';
 
 const App = () => {
-  const { country, currencyNameArray } = useAppSelector(currencyNameSelector);
+  const { fullCurencyName, currencyNameArray } = useAppSelector(currencyNameSelector);
 
   const { convertAmount } = useAppSelector(convertCurrencySelector);
-  const {
-    getAmount,
-    amount,
-    convertCurrencyCountry,
-    onChangeBase,
-    base,
-    onChangeConvertCur,
+  const { convert, amount, onChangeBase, getAmount, onChangeConvertCur } = useCurrency(
+    currencyNameArray,
+    fullCurencyName,
+  );
+  const { baseCurrency, convertCurrency, baseCurrencyFullName, convertFullCurrencyName } = convert;
 
-    convertCurrency,
-  } = useCurrency(currencyNameArray, country);
-
-  if (country) {
+  if (fullCurencyName) {
     return (
       <div className="App">
         <header>
           <div className="board">
-            <span>{`${amount} ${base} entspricht`}</span>
+            <span>{`${amount} ${baseCurrency} entspricht`}</span>
             <span className="board__convert-currency">{`${convertAmount} ${convertCurrency}`}</span>
           </div>
         </header>
         <div className="container">
           <div className=" currency">
             <MyInput getAmount={getAmount} amount={amount} />
-            <MySelect country={country} onChangeFunction={onChangeBase} value={base} />
+            <MySelect
+              fullCurencyName={fullCurencyName}
+              onChangeFunction={onChangeBase}
+              value={baseCurrencyFullName}
+            />
             <MyInput getAmount={getAmount} amount={convertAmount} />
             <MySelect
-              country={country}
+              fullCurencyName={fullCurencyName}
               onChangeFunction={onChangeConvertCur}
-              value={convertCurrencyCountry}
+              value={convertFullCurrencyName}
             />
           </div>
         </div>

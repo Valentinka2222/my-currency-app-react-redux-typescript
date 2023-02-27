@@ -3,10 +3,9 @@ import type { ActionTyp } from '../../entities/actionTypes';
 import type { ConvertCurrency } from '../../entities/currency';
 
 const initialState = {
-  convertAmount: 0,
+  convertAmount: 1,
 };
 const convertCurrencyReducer = (state: ConvertCurrency = initialState, action: ActionTyp) => {
-  console.log(action);
   switch (action.type) {
     case ActionTypes.FETCH_CONVERT_CURRENCY:
       return {

@@ -1,10 +1,10 @@
 type MySelectProps = {
   onChangeFunction: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   value: string | undefined;
-  country: string[];
+  fullCurencyName: string[];
 };
 
-const MySelect = ({ country, onChangeFunction, value }: MySelectProps): JSX.Element => {
+const MySelect = ({ fullCurencyName, onChangeFunction, value }: MySelectProps): JSX.Element => {
   return (
     <select
       className="currency__mount"
@@ -13,10 +13,9 @@ const MySelect = ({ country, onChangeFunction, value }: MySelectProps): JSX.Elem
       name={value}
       id={value}
     >
-      {country.map((el, index) => {
-        let selected = value === 'United States Dollar' ? 'selected' : 'false';
+      {fullCurencyName.map((el, index) => {
         return (
-          <option key={index} value={el} selected={selected}>
+          <option key={index} value={el}>
             {el}
           </option>
         );
