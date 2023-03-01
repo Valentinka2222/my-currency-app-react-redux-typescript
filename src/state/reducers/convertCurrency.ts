@@ -3,7 +3,7 @@ import type { ActionTyp } from '../../entities/actionTypes';
 import type { ConvertCurrency } from '../../entities/currency';
 
 const initialState = {
-  convertAmount: null,
+  convertAmount: 0,
   isLoading: false,
   error: null,
 };

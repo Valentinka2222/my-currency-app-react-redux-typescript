@@ -29,7 +29,7 @@ export type Convert = {
   convertFullCurrencyName?: string;
 };
 export type ConvertCurrency = {
-  convertAmount: null;
+  convertAmount: number;
   isLoading: boolean;
   error: string | null;
 };

@@ -1,13 +1,13 @@
 import MySelect from './MySelect';
 import MyInput from './MyInput';
-import { useAppSelector } from './app/hooks';
-import useCurrency from './app/useCurrency';
-import { currencyNameSelector, convertCurrencySelector } from './state/selectors';
+import { useAppSelector } from '../app/hooks';
+import useCurrency from '../app/useCurrency';
+import { currencyNameSelector, convertCurrencySelector } from '../state/selectors';
 import LinearProgress from '@mui/material/LinearProgress';
 import { Alert } from '@mui/material';
 import { Box } from '@mui/system';
 
-import './index.scss';
+import '../index.scss';
 
 const App = () => {
   const { fullCurencyName, currencyNameArray } = useAppSelector(currencyNameSelector);
