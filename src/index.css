@@ -6,10 +6,24 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+h1 {
+  text-align: center;
 }
 
 span {
-  width: 250px;
+  display: flex;
+  justify-content: center;
+  min-width: 33%;
+  flex: 1 0;
+}
+
+span:hover {
+  transform: scale(1.1);
+  -webkit-transform: scale(1.1);
 }
 
 option {
@@ -40,14 +54,20 @@ select {
 
 .board {
   display: flex;
-  flex-direction: column;
-  font-size: 30px;
-  width: 100%;
+  align-items: center;
+  flex-flow: row wrap;
+  height: 150px;
+  background: #020024;
+  background: radial-gradient(circle, #020024 0%, rgba(47, 166, 166, 0.891282) 35%);
+  animation: falls 1s ease 0.3s;
+  border: 7px solid white;
+  border-radius: 15px;
+  font-size: 2.5rem;
   margin-bottom: 25px;
 }
 
 .board__convert-currency {
-  color: blue;
+  display: table;
 }
 
 .container {
@@ -61,12 +81,22 @@ select {
   width: 100%;
   flex-wrap: wrap;
   justify-content: space-around;
-  border-radius: 5px;
-  margin-right: 20px;
 }
 
 .currency__mount {
   width: 45%;
-  border-radius: 5px;
-  border: solid 3px grey;
+}
+
+@keyframes falls {
+  0% {
+    opacity: 0;
+    top: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    top: 100px;
+  }
 }

@@ -8,4 +8,3 @@ export const params = (
     ...paramsObj,
   });
 };
-console.log(process.env);

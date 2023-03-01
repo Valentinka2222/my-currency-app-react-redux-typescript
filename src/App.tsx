@@ -1,45 +1,66 @@
-import { useAppSelector } from './app/hooks';
-
 import MySelect from './MySelect';
-
 import MyInput from './MyInput';
-import './index.scss';
+import { useAppSelector } from './app/hooks';
 import useCurrency from './app/useCurrency';
 import { currencyNameSelector, convertCurrencySelector } from './state/selectors';
+import LinearProgress from '@mui/material/LinearProgress';
+import { Alert } from '@mui/material';
+import { Box } from '@mui/system';
+
+import './index.scss';
 
 const App = () => {
   const { fullCurencyName, currencyNameArray } = useAppSelector(currencyNameSelector);
-
-  const { convertAmount } = useAppSelector(convertCurrencySelector);
+  const { convertAmount, isLoading, error } = useAppSelector(convertCurrencySelector);
   const { convert, amount, onChangeBase, getAmount, onChangeConvertCur } = useCurrency(
     currencyNameArray,
     fullCurencyName,
   );
   const { baseCurrency, convertCurrency, baseCurrencyFullName, convertFullCurrencyName } = convert;
 
+  if (error) {
+    return (
+      <Alert variant="filled" severity="error">
+        {error}
+      </Alert>
+    );
+  }
+
   if (fullCurencyName) {
     return (
       <div className="App">
+        <h1>Converter currency</h1>
         <header>
-          <div className="board">
-            <span>{`${amount} ${baseCurrency} entspricht`}</span>
-            <span className="board__convert-currency">{`${convertAmount} ${convertCurrency}`}</span>
-          </div>
+          {!isLoading ? (
+            <div className="board">
+              <span>{`From: ${amount}  ${baseCurrency}`}</span>
+              <span>💱</span>
+              <span>{`to: ${convertAmount} ${convertCurrency}`}</span>
+            </div>
+          ) : (
+            <div className="board">
+              <LinearProgress color="secondary" />
+            </div>
+          )}
         </header>
         <div className="container">
           <div className=" currency">
-            <MyInput getAmount={getAmount} amount={amount} />
-            <MySelect
-              fullCurencyName={fullCurencyName}
-              onChangeFunction={onChangeBase}
-              value={baseCurrencyFullName}
-            />
-            <MyInput getAmount={getAmount} amount={convertAmount} />
-            <MySelect
-              fullCurencyName={fullCurencyName}
-              onChangeFunction={onChangeConvertCur}
-              value={convertFullCurrencyName}
-            />
+            <Box>
+              <MyInput amount={amount} getAmount={getAmount} />
+              <MySelect
+                fullCurencyName={fullCurencyName}
+                onChangeFunction={onChangeBase}
+                value={baseCurrencyFullName}
+              />
+            </Box>
+            <Box>
+              <MyInput amount={convertAmount} getAmount={getAmount} />
+              <MySelect
+                fullCurencyName={fullCurencyName}
+                onChangeFunction={onChangeConvertCur}
+                value={convertFullCurrencyName}
+              />
+            </Box>
           </div>
         </div>
       </div>

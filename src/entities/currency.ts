@@ -5,28 +5,31 @@ export interface ParamsObj {
   from?: string;
   amount?: number | string;
 }
-export type Options = {
-  options: Record<string, string | number | ParamsObj | undefined>;
-};
 
 export interface CurrencyInitialState {
   currencyNameArray: string[];
   fullCurencyName: string[];
   abbr: string[];
-  isLoading: boolean;
   error: string | null;
 }
-export type ConvertCurrency = {
-  convertAmount: number;
+
+export type Options = {
+  options: Record<string, string | number | ParamsObj | undefined>;
 };
 
 export type CurrencyState = {
   currencyName: CurrencyInitialState;
   convertCurrencyAmount: ConvertCurrency;
 };
+
 export type Convert = {
   baseCurrency?: string;
   convertCurrency?: string;
   baseCurrencyFullName?: string;
   convertFullCurrencyName?: string;
+};
+export type ConvertCurrency = {
+  convertAmount: null;
+  isLoading: boolean;
+  error: string | null;
 };

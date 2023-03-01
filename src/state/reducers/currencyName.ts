@@ -7,22 +7,14 @@ const initialState: CurrencyInitialState = {
   currencyNameArray: [],
   fullCurencyName: [],
   abbr: [],
-  isLoading: false,
   error: null,
 };
 
 const currencyNameReducer = (state = initialState, action: ActionTyp): CurrencyInitialState => {
   switch (action.type) {
-    case ActionTypes.FETCH_START:
-      return {
-        ...state,
-        isLoading: true,
-        error: null,
-      };
     case ActionTypes.FETCH_SUCCESS:
       return {
         ...state,
-        isLoading: false,
         currencyNameArray: action.payload,
         fullCurencyName: Object.values(action.payload),
         abbr: Object.keys(action.payload),
@@ -30,10 +22,8 @@ const currencyNameReducer = (state = initialState, action: ActionTyp): CurrencyI
     case ActionTypes.FETCH_ERROR:
       return {
         ...state,
-        isLoading: false,
         error: action.payload,
       };
-
     default:
       return state;
   }
