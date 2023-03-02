@@ -29,7 +29,7 @@ const App = () => {
   if (fullCurencyName) {
     return (
       <div className="App">
-        <h1>Converter currency</h1>
+        <h1>Сurrency Converter</h1>
         <header>
           {!isLoading ? (
             <div className="board">
