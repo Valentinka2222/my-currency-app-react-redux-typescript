@@ -16,16 +16,7 @@ const MySelect = ({ fullCurencyName, onChangeFunction, value }: MySelectProps): 
         <InputLabel variant="standard" htmlFor="uncontrolled-native">
           Currency
         </InputLabel>
-        <NativeSelect
-          onChange={e => onChangeFunction(e)}
-          name={value}
-          id={value}
-          value={value}
-          inputProps={{
-            name: 'age',
-            id: 'uncontrolled-native',
-          }}
-        >
+        <NativeSelect onChange={e => onChangeFunction(e)} name={value} id={value} value={value}>
           {fullCurencyName.map((el, index) => {
             return (
               <option key={index} value={el}>
