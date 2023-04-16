@@ -3,7 +3,8 @@ package-lock.json
 /build
 .DS_Store
 
-
+# local env files
+.env*.local
 
 
 
