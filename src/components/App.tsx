@@ -5,6 +5,7 @@ import useCurrency from '../app/useCurrency';
 import { currencyNameSelector, convertCurrencySelector } from '../state/selectors';
 import LinearProgress from '@mui/material/LinearProgress';
 import { Alert } from '@mui/material';
+
 import { Box } from '@mui/system';
 
 import '../index.scss';
@@ -44,7 +45,7 @@ const App = () => {
           )}
         </header>
         <div className="container">
-          <div className=" currency">
+          <div className="currency">
             <Box>
               <MyInput amount={amount} getAmount={getAmount} />
               <MySelect

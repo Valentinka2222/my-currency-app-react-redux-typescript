@@ -11,7 +11,7 @@ type MySelectProps = {
 
 const MySelect = ({ fullCurencyName, onChangeFunction, value }: MySelectProps): JSX.Element => {
   return (
-    <Box sx={{ minWidth: '50%' }}>
+    <Box>
       <FormControl fullWidth>
         <InputLabel variant="standard" htmlFor="uncontrolled-native">
           Currency
