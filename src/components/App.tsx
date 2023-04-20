@@ -32,17 +32,17 @@ const App = () => {
       <div className="App">
         <h1>Сurrency Converter</h1>
         <header>
-          {!isLoading ? (
-            <div className="board">
-              <span>{`From: ${amount}  ${baseCurrency}`}</span>
-              <span>💱</span>
+          <div className="board">
+            <span>{`From: ${amount}  ${baseCurrency}`}</span> <span>💱</span>
+            {!isLoading ? (
               <span>{`to: ${convertAmount} ${convertCurrency}`}</span>
-            </div>
-          ) : (
-            <div className="board">
-              <LinearProgress color="secondary" />
-            </div>
-          )}
+            ) : (
+              <span>
+                {`to:`}
+                <LinearProgress sx={{ margin: 'auto' }} color="secondary" />
+              </span>
+            )}
+          </div>
         </header>
         <div className="container">
           <div className="currency">
